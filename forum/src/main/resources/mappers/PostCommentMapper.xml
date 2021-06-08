@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.forum.dao.PostCommentMapper">
+  <resultMap id="BaseResultMap" type="com.forum.pojo.PostComment">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="parent_comment_id" jdbcType="INTEGER" property="parentCommentId" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="profile" jdbcType="VARCHAR" property="profile" />
+    <result column="parent_comment_username" jdbcType="VARCHAR" property="parentCommentUsername" />
+    <result column="post_id" jdbcType="INTEGER" property="postId" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="like_num" jdbcType="INTEGER" property="likeNum" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="comment_num" jdbcType="INTEGER" property="commentNum" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, parent_comment_id, username, profile, parent_comment_username, post_id, content, 
+    like_num, status, create_time, update_time, comment_num
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from forum_post_comment
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from forum_post_comment
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.forum.pojo.PostComment">
+    insert into forum_post_comment (id, parent_comment_id, username, 
+      profile, parent_comment_username, post_id, 
+      content, like_num, status, 
+      create_time, update_time, comment_num
+      )
+    values (#{id,jdbcType=INTEGER}, #{parentCommentId,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, 
+      #{profile,jdbcType=VARCHAR}, #{parentCommentUsername,jdbcType=VARCHAR}, #{postId,jdbcType=INTEGER}, 
+      #{content,jdbcType=VARCHAR}, #{likeNum,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{commentNum,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.forum.pojo.PostComment">
+    insert into forum_post_comment
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="parentCommentId != null">
+        parent_comment_id,
+      </if>
+      <if test="username != null">
+        username,
+      </if>
+      <if test="profile != null">
+        profile,
+      </if>
+      <if test="parentCommentUsername != null">
+        parent_comment_username,
+      </if>
+      <if test="postId != null">
+        post_id,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+      <if test="likeNum != null">
+        like_num,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="commentNum != null">
+        comment_num,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="parentCommentId != null">
+        #{parentCommentId,jdbcType=INTEGER},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="profile != null">
+        #{profile,jdbcType=VARCHAR},
+      </if>
+      <if test="parentCommentUsername != null">
+        #{parentCommentUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="postId != null">
+        #{postId,jdbcType=INTEGER},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="likeNum != null">
+        #{likeNum,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="commentNum != null">
+        #{commentNum,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.forum.pojo.PostComment">
+    update forum_post_comment
+    <set>
+      <if test="parentCommentId != null">
+        parent_comment_id = #{parentCommentId,jdbcType=INTEGER},
+      </if>
+      <if test="username != null">
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="profile != null">
+        profile = #{profile,jdbcType=VARCHAR},
+      </if>
+      <if test="parentCommentUsername != null">
+        parent_comment_username = #{parentCommentUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="postId != null">
+        post_id = #{postId,jdbcType=INTEGER},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="likeNum != null">
+        like_num = #{likeNum,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="commentNum != null">
+        comment_num = #{commentNum,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.forum.pojo.PostComment">
+    update forum_post_comment
+    set parent_comment_id = #{parentCommentId,jdbcType=INTEGER},
+      username = #{username,jdbcType=VARCHAR},
+      profile = #{profile,jdbcType=VARCHAR},
+      parent_comment_username = #{parentCommentUsername,jdbcType=VARCHAR},
+      post_id = #{postId,jdbcType=INTEGER},
+      content = #{content,jdbcType=VARCHAR},
+      like_num = #{likeNum,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      comment_num = #{commentNum,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectByPostId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from forum_post_comment
+    where post_id =  #{postId,jdbcType=INTEGER}
+    and status = 1
+  </select>
+
+  <update id="updateProfileImgByUsername" parameterType="com.forum.pojo.PostComment">
+    update forum_post_comment
+    set
+      profile = #{profileImg,jdbcType=VARCHAR}
+    where username = #{username,jdbcType=VARCHAR}
+  </update>
+
+</mapper>
